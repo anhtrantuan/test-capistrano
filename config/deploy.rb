@@ -43,13 +43,13 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
       
-      # Stop running server (if exists)
-      execute(:kill, 'cat `tmp/pids/server.pid`') if test("[ -f 'tmp/pids/server.pid' ]")
+      within current_path do
+        # Stop running server (if exists)
+        execute(:kill, '`cat tmp/pids/server.pid`') if test("[ -f '#{current_path}/tmp/pids/server.pid' ]")
 
-      # Start daemonized server
-      within release_path do
+        # Start daemonized server
         with rails_env: "#{fetch(:rails_env)} #{fetch(:rvm_path)}/bin/rvm #{fetch(:rvm_ruby_version)} do" do
-          execute(:rails, 'server -e production -d')
+          execute(:rails, 'server -d')
         end
       end
     end

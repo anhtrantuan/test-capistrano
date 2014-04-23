@@ -18,7 +18,7 @@ role :web, %w{anhtran@54.254.251.177}
 
 # server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
 server '54.254.251.177', user: 'anhtran', roles: %{web app}
-
+set :rails_env, 'production'
 
 # Custom SSH Options
 # ==================
