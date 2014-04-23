@@ -46,7 +46,7 @@ namespace :deploy do
       execute(:kill, 'cat `tmp/pids/server.pid`') if test("[ -f 'tmp/pids/server.pid' ]")
       within release_path do
         with rails_env: "#{fetch(:rails_env)} #{fetch(:rvm_path)}/bin/rvm #{fetch(:rvm_ruby_version)} do" do
-          execute(:rails, 'server -e production -p 80 -d')
+          execute(:rails, 'server -e production -d')
         end
       end
     end
