@@ -42,11 +42,11 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
+
+      # Stop running server (if exists)
+      execute(:ps, "ax | grep -m 1 ruby | cut -d ' ' -f1 | xargs kill")
       
       within current_path do
-        # Stop running server (if exists)
-        execute(:kill, '`cat tmp/pids/server.pid`') if test("[ -f '#{current_path}/tmp/pids/server.pid' ]")
-
         # Start daemonized server
         with rails_env: "#{fetch(:rails_env)} #{fetch(:rvm_path)}/bin/rvm #{fetch(:rvm_ruby_version)} do" do
           execute(:rails, 'server -d')
