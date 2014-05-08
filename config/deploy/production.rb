@@ -7,8 +7,8 @@
 # role :app, %w{deploy@example.com}
 # role :web, %w{deploy@example.com}
 # role :db,  %w{deploy@example.com}
-role :app, %w{anhtran@54.254.251.177}
-role :web, %w{anhtran@54.254.251.177}
+role :app, %w{anhtran@54.255.135.54}
+role :web, %w{anhtran@54.255.135.54}
 
 # Extended Server Syntax
 # ======================
@@ -17,7 +17,7 @@ role :web, %w{anhtran@54.254.251.177}
 # used to set extended properties on the server.
 
 # server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
-server '54.254.251.177', user: 'anhtran', roles: %{web app}
+server '54.255.135.54', user: 'anhtran', roles: %{web app}
 set :rails_env, 'production'
 
 # Custom SSH Options
