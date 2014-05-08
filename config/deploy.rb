@@ -44,8 +44,9 @@ namespace :deploy do
       # execute :touch, release_path.join('tmp/restart.txt')
 
       # Stop running server (if exists)
-      execute(:ps, "ax | grep -m 1 ruby | cut -d ' ' -f1 | xargs kill")
-      
+      pids = capture("ps ax | grep -m 1 ruby | cut -d ' ' -f1 | xargs")
+      execute(:kill, pids) unless pids.empty? or pids !~ / /
+
       within current_path do
         # Start daemonized server
         with rails_env: "#{fetch(:rails_env)} #{fetch(:rvm_path)}/bin/rvm #{fetch(:rvm_ruby_version)} do" do
